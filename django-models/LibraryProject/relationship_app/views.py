@@ -127,19 +127,3 @@ def delete_book(request, book_id):
         book.delete()
         return redirect("book_list")
     return render(request, "relationship_app/delete_book.html", {"book": book})
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
-
-# Registration view (function-based)
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)                    # auto-login after register
-            return redirect('list_books')           # change to any page you want
-    else:
-        form = UserCreationForm()
-    return render(request, 'relationship_app/register.html', {'form': form})
